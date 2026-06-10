@@ -1,3 +1,5 @@
+from urllib.parse import unquote
+
 products = [
     {
         "id": 1,
@@ -241,9 +243,13 @@ products = [
     }
 ]
 
+
 def get_product_by_title(title):
+    # Decode %20 and special characters back into readable text spaces
+    decoded_title = unquote(title).strip()
+
     for product in products:
-        if (product['title']).strip() == (title).strip():
+        if product['title'].strip() == decoded_title:
             return product
     return None
 
