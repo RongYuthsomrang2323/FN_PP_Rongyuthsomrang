@@ -13,10 +13,21 @@ from product import (
 import secrets
 import json
 import requests
+import os  # Added for environment and path detection
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = 'your-secret-key'
+
+# ──────────────────────────────────────────────
+#  DATABASE CONFIGURATION (Vercel Fix)
+# ──────────────────────────────────────────────
+if os.environ.get('VERCEL'):
+    # Serverless systems are read-only; use /tmp for SQLite writes
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/users.db'
+else:
+    # Standard configuration for running locally on your computer
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'users.db')
 
 # Mail config — replace with your Gmail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -307,10 +318,11 @@ def products():
 @app.get('/product/<product_name>')
 def product(product_name):
     product = get_product_by_title(product_name)
+    if not product:
+        return "Product not found", 404
     related_product = get_product_by_category(product['category'])
     return render_template('front/product.html', product=product, related_product=related_product)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
