@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>www.rongyuthsomrang.com</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/front/styles.css">
+    <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0a0a0f;
+      color: #f0ede8;
+      margin: 0;
+    }
+
+    /* ── Glow blobs ── */
+    .products-page {
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .products-page::before,
+    .products-page::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .products-page::before {
+      width: 700px; height: 700px;
+      top: -200px; left: -200px;
+      background: radial-gradient(circle, rgba(29,158,117,0.06) 0%, transparent 70%);
+    }
+
+    .products-page::after {
+      width: 500px; height: 500px;
+      bottom: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(29,158,117,0.04) 0%, transparent 70%);
+    }
+
+    /* ── Hero ── */
+    .catalog-hero {
+      background: #12121f;
+      border-bottom: 1px solid #1e1e2e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .catalog-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(29,158,117,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #1d9e75 !important;
+      margin: 0 0 0.6rem;
+    }
+
+    .catalog-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      color: #f0ede8 !important;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .catalog-hero .lead {
+      font-size: 14px;
+      color: rgba(240,237,232,0.4) !important;
+      line-height: 1.7;
+    }
+
+    .catalog-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #1e1e2e;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #1e1e2e;
+    }
+
+    .catalog-stats > div {
+      background: #12121f !important;
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .catalog-stats strong {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #f0ede8;
+      line-height: 1;
+    }
+
+    .catalog-stats span {
+      font-size: 11px;
+      color: rgba(240,237,232,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Filter panel ── */
+    .filter-panel {
+      background: #12121f !important;
+      border: 1px solid #1e1e2e !important;
+      border-radius: 20px !important;
+      padding: 1.5rem !important;
+    }
+
+    .filter-panel h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f0ede8;
+    }
+
+    .filter-panel .form-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(240,237,232,0.4) !important;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-select {
+      background-color: #0a0a0f !important;
+      border: 1px solid #1e1e2e !important;
+      border-radius: 8px !important;
+      color: #f0ede8 !important;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 0.6rem 0.85rem !important;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%235dcaa5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+    }
+
+    .form-select:focus {
+      border-color: #1d9e75 !important;
+      box-shadow: none !important;
+      outline: none;
+    }
+
+    .form-select option { background: #0a0a0f; color: #f0ede8; }
+
+    .form-check-input {
+      background-color: #0a0a0f !important;
+      border: 1px solid #2e2e40 !important;
+    }
+
+    .form-check-input:checked {
+      background-color: #1d9e75 !important;
+      border-color: #1d9e75 !important;
+    }
+
+    .form-check-label {
+      font-size: 13px;
+      color: rgba(240,237,232,0.55) !important;
+    }
+
+    .link-teal {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1d9e75 !important;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .link-teal:hover { color: #5dcaa5 !important; }
+
+    /* ── Toolbar ── */
+    .catalog-toolbar-card {
+      background: #12121f !important;
+      border: 1px solid #1e1e2e !important;
+      border-radius: 16px !important;
+      padding: 1.25rem 1.5rem !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .catalog-toolbar-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: #f0ede8;
+    }
+
+    .filter-chip {
+      background: rgba(29,158,117,0.1);
+      color: #1d9e75;
+      border: 1px solid rgba(29,158,117,0.25);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 13px;
+      display: inline-block;
+    }
+
+    .sort-select {
+      width: auto !important;
+      min-width: 160px;
+      font-size: 12px !important;
+      padding: 0.45rem 2rem 0.45rem 0.75rem !important;
+    }
+
+    /* ── Product cards ── */
+    .card.product-card,
+    .card.catalog-product {
+      background: #12121f !important;
+      border: 1px solid #1e1e2e !important;
+      border-radius: 20px !important;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      color: #f0ede8 !important;
+    }
+
+    .card.product-card:hover,
+    .card.catalog-product:hover {
+      border-color: rgba(29,158,117,0.35) !important;
+      transform: translateY(-3px);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      background: #0a0a0f !important;
+      border-bottom: 1px solid #1e1e2e;
+      overflow: hidden;
+    }
+
+    .product-image-wrap .card-img-top {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.82);
+      transition: filter 0.2s;
+    }
+
+    .card.product-card:hover .card-img-top,
+    .card.catalog-product:hover .card-img-top {
+      filter: brightness(1);
+    }
+
+    .product-badge,
+    .small-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #1d9e75;
+      color: #04342c;
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 4px 11px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    .sale-badge {
+      background: #fb923c !important;
+      color: #431a05 !important;
+    }
+
+    .card-body {
+      background: transparent !important;
+      padding: 1.1rem 1.25rem 1.25rem !important;
+    }
+
+    .product-meta {
+      font-size: 11px;
+      color: rgba(240,237,232,0.3) !important;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-body h3,
+    .card-body .h5 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f0ede8 !important;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-description {
+      font-size: 12px;
+      color: rgba(240,237,232,0.38) !important;
+      line-height: 1.6;
+      margin-bottom: 0.9rem;
+    }
+
+    .price {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f0ede8 !important;
+    }
+
+    .rating-mini {
+      background: rgba(29,158,117,0.12);
+      color: #1d9e75;
+      border: 1px solid rgba(29,158,117,0.22);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+    }
+
+    /* ── CTA button ── */
+    .btn-teal,
+    .btn.btn-teal {
+      display: block !important;
+      width: 100% !important;
+      padding: 0.75rem !important;
+      background: #1d9e75 !important;
+      color: #04342c !important;
+      font-family: 'Syne', sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.04em !important;
+      text-align: center !important;
+      border-radius: 10px !important;
+      text-decoration: none !important;
+      border: none !important;
+      transition: background 0.15s, transform 0.1s !important;
+    }
+
+    .btn-teal:hover,
+    .btn.btn-teal:hover {
+      background: #5dcaa5 !important;
+      color: #04342c !important;
+    }
+
+    .btn-teal:active { transform: scale(0.98); }
+
+    /* ── Pagination ── */
+    .pagination .page-link {
+      background: #12121f !important;
+      border: 1px solid #1e1e2e !important;
+      color: rgba(240,237,232,0.5) !important;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 0.5rem 0.9rem;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .pagination .page-link:hover {
+      background: #1a1a2e !important;
+      color: #f0ede8 !important;
+      border-color: rgba(29,158,117,0.3) !important;
+    }
+
+    .pagination .page-item.active .page-link {
+      background: #1d9e75 !important;
+      border-color: #1d9e75 !important;
+      color: #04342c !important;
+      font-weight: 700;
+    }
+
+    .pagination .page-item.disabled .page-link {
+      background: #0a0a0f !important;
+      color: rgba(240,237,232,0.2) !important;
+      border-color: #1e1e2e !important;
+    }
+
+    /* ── Bootstrap / styles.css hard overrides ── */
+    .bg-white { background-color: #12121f !important; }
+    .bg-soft  { background-color: #0a0a0f !important; }
+    .border   { border-color: #1e1e2e !important; }
+    .text-muted { color: rgba(240,237,232,0.4) !important; }
+    .text-white { color: #f0ede8 !important; }
+    .text-white-50 { color: rgba(240,237,232,0.4) !important; }
+    .rounded-3 { border-radius: 16px !important; }
+
+    /* Catalog stats and filter panel children */
+    .catalog-stats > div,
+    .filter-panel,
+    .catalog-toolbar-card {
+      background: #12121f !important;
+    }
+  </style>
+</head>
+<body class="bg-soft">
+
+  {% include 'front/share/navbar.html' %}
+
+  <main class="products-page">
+
+    <!-- Hero -->
+    <section class="catalog-hero">
+      <div class="container py-5">
+        <div class="row g-4 align-items-end">
+          <div class="col-lg-7">
+            <p class="eyebrow">Product catalog</p>
+            <h1 class="display-4 fw-bold mb-3">Shop electronics with a cleaner way to compare.</h1>
+            <p class="lead mb-0">Browse laptops, phones, audio, gaming gear, and accessories from trusted brands.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="catalog-stats">
+              <div>
+                <strong>8</strong>
+                <span>Products</span>
+              </div>
+              <div>
+                <strong>5</strong>
+                <span>Brands</span>
+              </div>
+              <div>
+                <strong>4.8</strong>
+                <span>Avg rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog body -->
+    <section class="container py-5">
+      <div class="row g-4">
+
+        <!-- Filters -->
+        <aside class="col-lg-3">
+          <div class="filter-panel catalog-filter">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="h5 fw-bold mb-0">Filters</h2>
+              <a class="link-teal" href="/products">Reset</a>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label" for="categoryFilter">Category</label>
+              <select class="form-select" id="categoryFilter">
+                <option>All categories</option>
+                <option>Laptops</option>
+                <option>Phones</option>
+                <option>Audio</option>
+                <option>Gaming</option>
+                <option>Accessories</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label" for="brandFilter">Brand</label>
+              <select class="form-select" id="brandFilter">
+                <option>All brands</option>
+                <option>Aster</option>
+                <option>Zenith</option>
+                <option>SonicLab</option>
+                <option>GameForge</option>
+                <option>Portix</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label" for="priceFilter">Price range</label>
+              <select class="form-select" id="priceFilter">
+                <option>Any price</option>
+                <option>Under $200</option>
+                <option>$200 - $499</option>
+                <option>$500 - $999</option>
+                <option>$1,000+</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <p class="form-label mb-2">Availability</p>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="inStock" checked>
+                <label class="form-check-label" for="inStock">In stock</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="onSale">
+                <label class="form-check-label" for="onSale">On sale</label>
+              </div>
+            </div>
+
+            <a class="btn btn-teal w-100" href="/products">Apply filters</a>
+          </div>
+        </aside>
+
+        <!-- Product grid -->
+        <div class="col-lg-9">
+
+          <!-- Toolbar -->
+          <div class="catalog-toolbar-card mb-4">
+            <div>
+              <p class="eyebrow mb-1">Featured selection</p>
+              <h2 class="h4 fw-bold mb-0">8 products found</h2>
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <span class="filter-chip">Laptops</span>
+              <span class="filter-chip">Audio</span>
+              <select class="form-select sort-select" aria-label="Sort products">
+                <option>Featured</option>
+                <option>Price: low to high</option>
+                <option>Price: high to low</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cards -->
+          <div class="row g-4">
+              {% for product in  products %}
+                    <div class="col-md-6 col-xl-4">
+                                  <div class="card product-card catalog-product h-100">
+                                    <div class="product-image-wrap">
+                                      <span class="product-badge small-badge">Best seller</span>
+                                      <img src="{{ product.image}}" class="card-img-top" alt="Nova Ultrabook 14">
+                                    </div>
+                                    <div class="card-body">
+                                      <p class="product-meta">{{ product.category}}</p>
+                                      <h3 class="h5">{{ product.title}}</h3>
+                                      <p class="product-description pro-description">{{ product.description}}</p>
+                                      <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <p class="price mb-0">${{ product.price }}</p>
+                                        <span class="rating-mini">★ 4.8</span>
+                                      </div>
+                                      <a class="btn btn-teal w-100 mb-2" href="/product/{{ product.title }}">View product</a>
+                                      <form method="POST" action="/cart/add/{{ product.id }}">
+                                        <button class="btn w-100" type="submit"
+                                          style="background:transparent;border:1px solid #1d9e75;color:#1d9e75;border-radius:12px;padding:0.55rem;font-weight:600;cursor:pointer;">
+                                          Add to cart
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+              {% endfor %}
+          </div>
+
+          <!-- Pagination -->
+          <nav class="mt-5" aria-label="Product pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled"><a class="page-link" href="/products">Previous</a></li>
+              <li class="page-item active"><a class="page-link" href="/products">1</a></li>
+              <li class="page-item"><a class="page-link" href="/products">2</a></li>
+              <li class="page-item"><a class="page-link" href="/products">Next</a></li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  {% include 'front/share/footer.html' %}
+</body>
+</html>

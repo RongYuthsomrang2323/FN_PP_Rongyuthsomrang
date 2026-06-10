@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>www.rongyuthsomrang.com</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/front/styles.css">
+    <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0a0a0f;
+      color: #f0ede8;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Hero ── */
+    .checkout-hero {
+      background: #0f0f1a;
+      border-bottom: 1px solid #1e1e2e;
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .checkout-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(29,158,117,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-text { flex: 1; min-width: 260px; }
+
+    .eyebrow {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #1d9e75;
+      margin: 0 0 0.75rem;
+    }
+
+    .checkout-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #f0ede8;
+      margin: 0 0 0.5rem;
+      line-height: 1.15;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(240,237,232,0.45);
+      margin: 0;
+      font-weight: 300;
+    }
+
+    /* ── Progress ── */
+    .cart-progress {
+      display: flex;
+      align-items: center;
+      background: #12121f;
+      border: 1px solid #1e1e2e;
+      border-radius: 12px;
+      padding: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .cart-progress div {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      color: #c8c4be !important;
+      background: rgba(255,255,255,0.05);
+      white-space: nowrap;
+    }
+
+    .cart-progress div.active {
+      background: #1d9e75 !important;
+      color: #04342c !important;
+    }
+
+    /* ── Body layout ── */
+    .checkout-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .checkout-body { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cards ── */
+    .checkout-card {
+      background: #12121f;
+      border: 1px solid #1e1e2e;
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .checkout-card:last-child { margin-bottom: 0; }
+
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .step-number {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: #1e1e2e;
+      border: 1px solid #2a2a3e;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1d9e75;
+      flex-shrink: 0;
+    }
+
+    .card-header-row h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f0ede8;
+      margin: 0.1rem 0 0;
+    }
+
+    /* ── Form ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-full { grid-column: 1 / -1; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.45);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #0a0a0f;
+      border: 1px solid #1e1e2e;
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: #f0ede8;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .form-control:focus { border-color: #1d9e75; box-shadow: none; }
+    .form-control::placeholder { color: rgba(240,237,232,0.2); }
+
+    /* ── QR Section ── */
+    .qr-wrap {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      .qr-wrap { grid-template-columns: 1fr; }
+    }
+
+    .qr-box {
+      background: #0a0a0f;
+      border: 1px solid #1e1e2e;
+      border-radius: 12px;
+      padding: 0.75rem;
+      display: inline-block;
+    }
+
+    .qr-box img {
+      display: block;
+      width: 130px; height: 130px;
+      border-radius: 6px;
+      filter: invert(1) hue-rotate(130deg) saturate(0.6);
+      opacity: 0.85;
+    }
+
+    .payment-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #1e1e2e;
+      font-size: 13px;
+    }
+
+    .payment-detail:last-of-type { border-bottom: none; }
+    .payment-detail span { color: rgba(240,237,232,0.5); }
+    .payment-detail strong { color: #f0ede8; font-weight: 500; }
+
+    .payment-note {
+      font-size: 12px;
+      color: rgba(240,237,232,0.35);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* ── Order Summary ── */
+    .order-summary-card {
+      background: #12121f;
+      border: 1px solid #1e1e2e;
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: sticky;
+      top: 1.5rem;
+    }
+
+    .order-summary-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f0ede8;
+      margin: 0.25rem 0 1.5rem;
+    }
+
+    .checkout-item {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 0.85rem;
+      align-items: center;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid #1e1e2e;
+    }
+
+    .checkout-item:last-of-type { border-bottom: none; }
+
+    .checkout-item img {
+      width: 52px; height: 52px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #1e1e2e;
+      filter: brightness(0.85);
+    }
+
+    .checkout-item h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: #f0ede8;
+      margin: 0 0 0.2rem;
+    }
+
+    .checkout-item p {
+      font-size: 11px;
+      color: rgba(240,237,232,0.35);
+      margin: 0;
+    }
+
+    .checkout-item strong {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f0ede8;
+    }
+
+    /* ── Summary Stack ── */
+    .summary-stack {
+      margin-top: 1.25rem;
+      border-top: 1px solid #1e1e2e;
+      padding-top: 1rem;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 0.3rem 0;
+      color: rgba(240,237,232,0.55);
+    }
+
+    .summary-line strong { color: rgba(240,237,232,0.8); font-weight: 400; }
+
+    .summary-line.total {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f0ede8;
+      padding-top: 0.75rem;
+      margin-top: 0.25rem;
+      border-top: 1px solid #1e1e2e;
+    }
+
+    .summary-line.total strong { color: #1d9e75; font-weight: 700; }
+
+    /* ── Buttons ── */
+    .btn-teal {
+      display: block;
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 0.85rem;
+      background: #1d9e75;
+      color: #04342c;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-teal:hover { background: #5dcaa5; color: #04342c; }
+    .btn-teal:active { transform: scale(0.98); }
+
+    .btn-outline-secondary {
+      display: block;
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.75rem;
+      background: transparent;
+      color: rgba(240,237,232,0.45);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      text-align: center;
+      border: 1px solid #1e1e2e;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .btn-outline-secondary:hover { border-color: #2a2a3e; color: rgba(240,237,232,0.7); }
+
+    /* ── Secure Note ── */
+    .secure-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1rem;
+      background: #0a0a0f;
+      border: 1px solid #1e1e2e;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .secure-note strong {
+      display: block;
+      font-size: 12px;
+      color: rgba(240,237,232,0.7);
+      margin-bottom: 2px;
+    }
+
+    .secure-note span { color: rgba(240,237,232,0.3); line-height: 1.5; }
+
+    /* ── Order success state ── */
+    .order-success {
+      max-width: 600px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: #12121f;
+      border: 1px solid #1e1e2e;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .order-success .check {
+      width: 64px; height: 64px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: rgba(29,158,117,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+    }
+    .order-success h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #f0ede8;
+      margin: 0 0 0.5rem;
+    }
+    .order-success p {
+      color: rgba(240,237,232,0.5);
+      font-size: 14px;
+      margin: 0 0 1.5rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  {% include 'front/share/navbar.html' %}
+
+  <main>
+  {% if ordered %}
+    <!-- ✅ Success state shown after placing the order -->
+    <div class="order-success">
+      <div class="check">✅</div>
+      <h1>Order placed!</h1>
+      <p>Thank you — your order has been sent to our team and we'll be in touch shortly to confirm payment and delivery.</p>
+      <a class="btn-teal" href="/products">Continue shopping</a>
+    </div>
+  {% else %}
+    <section class="checkout-hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Secure checkout</p>
+          <h1>Complete your order<br>with QR payment.</h1>
+          <p class="hero-sub">Add delivery details, review the order, and scan the QR code to pay.</p>
+        </div>
+        <div class="cart-progress">
+          <div>Cart</div>
+          <div class="active">Checkout</div>
+          <div>Payment</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- One form wraps the shipping fields AND the confirm button -->
+    <form method="POST" action="/checkout">
+    <section class="checkout-body">
+      <div>
+        <!-- Step 1: Shipping -->
+        <div class="checkout-card">
+          <div class="card-header-row">
+            <span class="step-number">1</span>
+            <div>
+              <p class="eyebrow">Delivery</p>
+              <h2>Shipping information</h2>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label class="form-label" for="firstName">First name</label>
+              <input class="form-control" id="firstName" name="first_name" type="text" placeholder="Alex" required>
+            </div>
+            <div>
+              <label class="form-label" for="lastName">Last name</label>
+              <input class="form-control" id="lastName" name="last_name" type="text" placeholder="Morgan" required>
+            </div>
+            <div>
+              <label class="form-label" for="email">Email</label>
+              <input class="form-control" id="email" name="email" type="email" placeholder="alex@example.com" required>
+            </div>
+            <div>
+              <label class="form-label" for="phone">Phone</label>
+              <input class="form-control" id="phone" name="phone" type="tel" placeholder="+855 12 345 678" required>
+            </div>
+            <div class="form-full">
+              <label class="form-label" for="address">Address</label>
+              <textarea class="form-control" id="address" name="address" rows="4" placeholder="Street, city, state, postal code" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Payment -->
+        <div class="checkout-card">
+          <div class="card-header-row">
+            <span class="step-number">2</span>
+            <div>
+              <p class="eyebrow">Payment</p>
+              <h2>QR code payment</h2>
+            </div>
+          </div>
+
+          <div class="qr-wrap">
+            <div class="qr-box">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=Order%20total%20${{ '%.2f'|format(subtotal) }}" alt="QR code payment">
+            </div>
+            <div>
+              <div class="payment-detail">
+                <span>Payment amount</span>
+                <strong>${{ '%.2f'|format(subtotal) }}</strong>
+              </div>
+              <div class="payment-detail">
+                <span>Payment method</span>
+                <strong>QR bank transfer</strong>
+              </div>
+              <p class="payment-note">Scan the QR code with your banking app, then press “Confirm order” below to send your order to our team.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <aside>
+        <div class="order-summary-card">
+          <p class="eyebrow">Review</p>
+          <h2>Order summary</h2>
+
+          {% for item in items %}
+          <div class="checkout-item">
+            <img src="{{ item.product.image }}" alt="{{ item.product.title }}">
+            <div>
+              <h3>{{ item.product.title }}</h3>
+              <p>Qty {{ item.qty }} · {{ item.product.category }}</p>
+            </div>
+            <strong>${{ '%.2f'|format(item.line_total) }}</strong>
+          </div>
+          {% else %}
+          <p style="color:rgba(240,237,232,0.45);font-size:13px;">Your cart is empty.</p>
+          {% endfor %}
+
+          <div class="summary-stack">
+            <div class="summary-line"><span>Subtotal</span><strong>${{ '%.2f'|format(subtotal) }}</strong></div>
+            <div class="summary-line"><span>Shipping</span><strong>Free</strong></div>
+            <div class="summary-line total"><span>Total</span><strong>${{ '%.2f'|format(subtotal) }}</strong></div>
+          </div>
+
+          {% if items %}
+            <button class="btn-teal" type="submit">Confirm order</button>
+          {% else %}
+            <a class="btn-teal" href="/products">Add products first</a>
+          {% endif %}
+          <a class="btn-outline-secondary" href="/cart">Back to cart</a>
+
+          <div class="secure-note">
+            <span>🔒</span>
+            <div>
+              <strong>Protected checkout</strong>
+              <span>Your order details are sent securely to our team for confirmation.</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+    </form>
+  {% endif %}
+  </main>
+
+  {% include 'front/share/footer.html' %}
+</body>
+</html>

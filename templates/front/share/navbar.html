@@ -1,0 +1,194 @@
+<header class="modern-header sticky-top">
+  <nav class="navbar container py-3">
+
+    <!-- Logo -->
+    <a class="navbar-brand logo-text" href="/">
+      RONGYUTHSOMRANG
+    </a>
+
+    <!-- Mobile Toggle -->
+    <input class="nav-toggle" type="checkbox" id="navToggleHome">
+
+    <label class="hamburger-button" for="navToggleHome" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Navigation -->
+        <div class="navbar-nav nav-menu ms-auto align-items-center gap-3">
+
+          <a class="nav-link {{ 'active' if request.path == '/' else '' }}" href="/">Home</a>
+
+          <a class="nav-link {{ 'active' if request.path == '/products' else '' }}" href="/products">Products</a>
+
+          <a class="nav-link {{ 'active' if request.path == '/contact' else '' }}" href="/contact">Contact</a>
+
+          {% if session.get('user_id') %}
+            <a class="nav-link {{ 'active' if request.path == '/account' else '' }}" href="/account">{{ session.get('user_name', 'Account') }}</a>
+            <a class="nav-link" href="/logout">Logout</a>
+          {% else %}
+            <a class="nav-link {{ 'active' if request.path == '/login' else '' }}" href="/login">Login</a>
+          {% endif %}
+
+          <a class="nav-link cart-btn {{ 'active' if request.path == '/cart' else '' }}" href="/cart">
+            Cart
+          </a>
+
+        </div>
+
+  </nav>
+</header>
+
+<style>
+/* HEADER */
+.modern-header{
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 999;
+}
+
+/* NAVBAR */
+.site-navbar,
+.navbar{
+  position: relative;
+}
+
+/* LOGO */
+.logo-text{
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.3s ease;
+}
+
+.logo-text:hover{
+  color: #60a5fa;
+}
+
+/* NAV LINKS */
+.nav-menu{
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-link{
+  position: relative;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s ease;
+  padding: 8px 14px;
+  border-radius: 12px;
+}
+
+.nav-link:hover{
+  color: #ffffff;
+  background: rgba(255,255,255,0.06);
+}
+
+.nav-link.active{
+  color: #60a5fa;
+}
+
+/* UNDERLINE EFFECT */
+.nav-link::after{
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: 4px;
+  width: 0%;
+  height: 2px;
+  background: #60a5fa;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after{
+  width: calc(100% - 28px);
+}
+
+/* CART BUTTON */
+.cart-btn{
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff !important;
+  padding: 10px 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+}
+
+.cart-btn:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
+}
+
+/* MOBILE TOGGLE */
+.nav-toggle{
+  display: none;
+}
+
+.hamburger-button{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger-button span{
+  width: 26px;
+  height: 3px;
+  border-radius: 999px;
+  background: #fff;
+  transition: 0.3s ease;
+}
+
+/* MOBILE */
+@media(max-width: 991px){
+
+  .hamburger-button{
+    display: flex;
+    margin-left: auto;
+  }
+
+  .nav-menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0f172a;
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    flex-direction: column;
+    align-items: flex-start !important;
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    transition: 0.3s ease;
+  }
+
+  .nav-menu .nav-link{
+    width: 100%;
+  }
+
+  .nav-toggle:checked ~ .nav-menu{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .cart-btn{
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-text{
+    font-size: 22px;
+  }
+}
+</style>

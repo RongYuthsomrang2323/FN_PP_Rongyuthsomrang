@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>www.rongyuthsomrang.com</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/front/styles.css">
+
+  <style>
+    body.bg-soft{
+      background: #0f172a;
+      color: #fff;
+    }
+
+    /* HERO */
+    .account-hero{
+      position: relative;
+      overflow: hidden;
+      background:
+      radial-gradient(circle at top right, rgba(59,130,246,0.35), transparent 30%),
+      linear-gradient(135deg,#0f172a,#111827);
+      padding: 70px 0 40px;
+    }
+
+    .account-hero::before{
+      content:"";
+      position:absolute;
+      top:-120px;
+      right:-120px;
+      width:350px;
+      height:350px;
+      background:rgba(96,165,250,0.2);
+      filter:blur(120px);
+      border-radius:50%;
+    }
+
+    .eyebrow{
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #60a5fa !important;
+    }
+
+    /* GLASS EFFECT */
+    .glass-card{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    /* AVATAR */
+    .account-avatar{
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:24px;
+      color:#fff;
+      box-shadow:0 10px 24px rgba(37,99,235,0.35);
+    }
+
+    /* HERO CARD */
+    .account-hero-card{
+      padding: 24px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+
+    /* SIDEBAR */
+    .account-sidebar{
+      padding: 30px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .account-sidebar h2{
+      color:#fff;
+    }
+
+    .account-sidebar .text-muted{
+      color: rgba(255,255,255,0.6) !important;
+    }
+
+    /* MENU */
+    .account-menu{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .account-menu a{
+      text-decoration:none;
+      color:rgba(255,255,255,0.7);
+      padding:14px 18px;
+      border-radius:14px;
+      transition:0.3s ease;
+      font-weight:600;
+    }
+
+    .account-menu a:hover{
+      background: rgba(255,255,255,0.08);
+      color:#fff;
+      transform: translateX(4px);
+    }
+
+    .account-menu a.active{
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      color:#fff;
+      box-shadow:0 10px 24px rgba(37,99,235,0.35);
+    }
+
+    /* ACCOUNT STATUS */
+    .secure-note{
+      background: rgba(59,130,246,0.12);
+      border:1px solid rgba(96,165,250,0.2);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .secure-note strong{
+      display:block;
+      margin-bottom:6px;
+      color:#fff;
+    }
+
+    .secure-note span{
+      color:rgba(255,255,255,0.7);
+      font-size:14px;
+    }
+
+    /* STATS */
+    .account-stat{
+      padding: 28px;
+      transition:0.3s ease;
+    }
+
+    .account-stat:hover{
+      transform: translateY(-4px);
+    }
+
+    .account-stat span{
+      display:block;
+      color:rgba(255,255,255,0.65);
+      margin-bottom:10px;
+    }
+
+    .account-stat strong{
+      font-size:38px;
+      font-weight:800;
+      color:#fff;
+    }
+
+    /* PANELS */
+    .account-panel{
+      padding: 30px;
+      transition:0.3s ease;
+    }
+
+    .account-panel:hover{
+      transform: translateY(-3px);
+    }
+
+    /* ORDER CARD */
+    .order-card{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px;
+      border-radius:18px;
+      background: rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.06);
+      margin-bottom:16px;
+      transition:0.3s ease;
+    }
+
+    .order-card:hover{
+      background: rgba(255,255,255,0.08);
+    }
+
+    .order-card strong{
+      display:block;
+      color:#fff;
+    }
+
+    .order-card span{
+      color:rgba(255,255,255,0.65);
+      font-size:14px;
+    }
+
+    /* BUTTONS */
+    .btn-teal{
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      border:none;
+      border-radius:14px;
+      padding:12px 20px;
+      color:#fff;
+      font-weight:700;
+      transition:0.3s ease;
+    }
+
+    .btn-teal:hover{
+      color:#fff;
+      transform: translateY(-2px);
+      box-shadow:0 12px 24px rgba(37,99,235,0.35);
+    }
+
+    .btn-outline-secondary{
+      border:1px solid rgba(255,255,255,0.15);
+      color:#fff;
+      background:transparent;
+      border-radius:14px;
+      padding:12px 20px;
+    }
+
+    .btn-outline-secondary:hover{
+      background: rgba(255,255,255,0.08);
+      color:#fff;
+    }
+
+    /* STEP */
+    .step-number{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      color:#fff;
+      font-weight:700;
+    }
+
+    /* FORM */
+    .form-control{
+      background: rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      color:#fff;
+      padding:14px 16px;
+    }
+
+    .form-control:focus{
+      background: rgba(255,255,255,0.08);
+      border-color:#60a5fa;
+      color:#fff;
+      box-shadow:none;
+    }
+
+    .form-label{
+      color:#fff;
+    }
+
+    .form-control::placeholder{
+      color:rgba(255,255,255,0.45);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 991px){
+
+      .account-sidebar{
+        position: relative;
+        top: 0;
+      }
+
+      .account-hero{
+        text-align:center;
+      }
+
+      .account-hero-card{
+        justify-content:center;
+      }
+
+      .order-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+    }
+
+    @media(max-width: 768px){
+
+      .display-4{
+        font-size: 2.3rem;
+      }
+
+      .account-stat strong{
+        font-size:30px;
+      }
+    }
+    .account-menu{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .account-menu a{
+      display:block;
+      width:100%;
+
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+
+      color:#ffffff !important;
+      text-decoration:none;
+
+      padding:18px 22px;
+      border-radius:18px;
+
+      font-weight:600;
+      font-size:17px;
+
+      transition:0.3s ease;
+    }
+
+    /* HOVER */
+    .account-menu a:hover{
+      background: rgba(255,255,255,0.12);
+      color:#fff !important;
+      transform: translateX(4px);
+    }
+
+    /* ACTIVE */
+    .account-menu a.active{
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+      border:none;
+      color:#fff !important;
+
+      box-shadow:
+        0 10px 25px rgba(37,99,235,0.35),
+        inset 0 1px 1px rgba(255,255,255,0.15);
+    }
+  </style>
+</head>
+
+<body class="bg-soft">
+
+  {% include 'front/share/navbar.html' %}
+
+  <main>
+
+    <!-- HERO -->
+    <section class="account-hero">
+      <div class="container py-5">
+
+        <div class="row g-4 align-items-center">
+
+          <div class="col-lg-8">
+            <p class="eyebrow">User account</p>
+
+            <h1 class="display-4 fw-bold text-white mb-3">
+              Manage your profile, orders, and checkout details.
+            </h1>
+
+            <p class="lead text-white-50 mb-0">
+              Keep your delivery information ready and review recent electronics purchases.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="glass-card account-hero-card">
+              <div class="account-avatar">{{ user.name[:2]|upper }}</div>
+
+              <div>
+                <h2 class="h5 text-white mb-1">{{ user.name }}</h2>
+                <p class="text-white-50 mb-0">Verified customer</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="container py-5">
+
+      <div class="row g-4">
+
+        <!-- SIDEBAR -->
+        <aside class="col-lg-4">
+
+          <div class="glass-card account-sidebar">
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="account-avatar">{{ user.name[:2]|upper }}</div>
+
+              <div>
+                <h2 class="h4 fw-bold mb-1">{{ user.name }}</h2>
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+
+            <div class="account-menu">
+              <a class="active" href="/account">Dashboard</a>
+              <a href="/cart">Cart</a>
+              <a href="/checkout">Checkout</a>
+              <a href="/logout">Logout</a>
+            </div>
+
+            <div class="secure-note mt-4">
+              <strong>Account status</strong>
+              <span>Email verified and ready for QR checkout.</span>
+            </div>
+
+          </div>
+
+        </aside>
+
+        <!-- MAIN -->
+        <div class="col-lg-8">
+
+          <!-- STATS -->
+          <div class="row g-4 mb-4">
+
+            <div class="col-md-4">
+              <div class="glass-card account-stat">
+                <span>Orders</span>
+                <strong>6</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="glass-card account-stat">
+                <span>Active</span>
+                <strong>2</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="glass-card account-stat">
+                <span>Saved</span>
+                <strong>4</strong>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  {% include 'front/share/footer.html' %}
+
+</body>
+</html>
